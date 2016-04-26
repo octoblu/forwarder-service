@@ -14,8 +14,13 @@ meshblu_auth_uuid
 meshblu_auth_token
 ````
 The UUID and Token should belong to the user or device that will have subscriptions created on their behalf
+### Get Forwarder Types /forwarders/types GET
+### Get all forwarders /forwarders
+### Get Forwarder by UUID /forwarders/:UUID
+### Create Forwarder /forwarders POST
+### Add Forwarder Subscriptions /forwarders/:UUID/subscriptions PUT
+### Remove Forwarder subscriptions /forwarders/:UUID/subscriptions DELETE
 
-### Register Forwarder /register/forwarder PUT
 Register a new forwarder with the forwarder options in the body of the request
 Input:
 _forwarderOptions_ - The forwarder specific device options that need to be set upon registration of the forwarder.
@@ -26,7 +31,6 @@ _forwarderOptions_ - The forwarder specific device options that need to be set u
   "type": "forwarder:mongo",
 
   "host": "https://computes.io",
-  "port": "12341"
   "databaseName": "IoTDB",
   "user": "myuser",
   "password": ""

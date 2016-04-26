@@ -4,7 +4,7 @@ express            = require 'express'
 bodyParser         = require 'body-parser'
 errorHandler       = require 'errorhandler'
 meshbluHealthcheck = require 'express-meshblu-healthcheck'
-meshbluAuth        = require 'express-meshblu-auth'
+MeshbluAuth        = require 'express-meshblu-auth'
 MeshbluConfig      = require 'meshblu-config'
 debug              = require('debug')('forwarder-subscription-service:server')
 Router             = require './router'
@@ -18,12 +18,19 @@ class Server
     @server.address()
 
   run: (callback) =>
+    meshbluAuth = new MeshbluAuth {
+      server: @meshbluConfig.server
+      port: @meshbluConfig.port
+      protocol: @meshbluConfig.protocol
+    }
+
     app = express()
     app.use morgan 'dev', immediate: false unless @disableLogging
     app.use cors()
     app.use errorHandler()
     app.use meshbluHealthcheck()
-    app.use meshbluAuth(@meshbluConfig)
+    app.use meshbluAuth.retrieve()
+    app.use meshbluAuth.gateway()
     app.use bodyParser.urlencoded limit: '1mb', extended : true
     app.use bodyParser.json limit : '1mb'
 

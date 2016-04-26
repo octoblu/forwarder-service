@@ -2,8 +2,7 @@
   "name": "forwarder-subscription-service",
   "version": "1.0.0",
   "description": "Put some description here",
-  "keywords": [
-  ],
+  "keywords": [],
   "homepage": "https://github.com/octoblu/forwarder-subscription",
   "bugs": "https://github.com/octoblu/forwarder-subscription/issues",
   "author": {
@@ -20,12 +19,17 @@
     "test": "mocha"
   },
   "devDependencies": {
+    "@octoblu/shmock": "^0.7.2",
     "chai": "^3.4.1",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-connect": "^3.2.3",
+    "gulp-cson": "^0.4.0",
+    "gulp-jsoncombine": "^1.0.3",
     "istanbul": "^0.4.0",
     "mocha": "^2.3.4",
     "mocha-istanbul": "^0.2.0",
     "request": "^2.66.0",
-    "@octoblu/shmock": "^0.7.2",
     "sinon": "^1.17.2",
     "sinon-chai": "^2.8.0"
   },
@@ -36,14 +40,14 @@
     "debug": "^2.2.0",
     "errorhandler": "^1.4.2",
     "express": "^4.13.3",
-    "express-meshblu-healthcheck": "^1.0.1",
     "express-meshblu-auth": "^2.0.0",
+    "express-meshblu-healthcheck": "^1.0.1",
+    "gulp-jsoncombine": "^1.0.3",
     "lodash": "^3.10.1",
     "meshblu-config": "^3.1.1",
     "morgan": "^1.6.1"
   },
-  "peerDependencies": {
-  },
+  "peerDependencies": {},
   "engines": {
     "node": ">=0.8.0",
     "npm": ">=1.2.10"

@@ -1,0 +1,112 @@
+{
+  "elasticsearch": {
+    "name": "",
+    "forwarderId": "",
+    "logoUrl": "https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/.svg",
+    "deviceType": "forwarder:",
+    "description": "",
+    "connector": "meshblu-",
+    "schemas": {
+      "version": "2.0.0",
+      "configure": {
+        "type": "object",
+        "properties": {
+          "exampleOption": {
+            "title": "example",
+            "type": "string",
+            "required": true
+          }
+        }
+      }
+    }
+  },
+  "mongodb": {
+    "name": "MongoDB Forwarder",
+    "forwarderId": "mongodb-forwarder",
+    "logoUrl": "https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/mongodb.svg",
+    "deviceType": "forwarder:mongodb",
+    "description": "",
+    "connector": "meshblu-mongodb-fowarder",
+    "schemas": {
+      "version": "2.0.0",
+      "configure": {
+        "type": "object",
+        "properties": {
+          "exampleOption": {
+            "title": "example",
+            "type": "string",
+            "required": true
+          }
+        }
+      }
+    }
+  },
+  "ms-azure": {
+    "name": "",
+    "forwarderId": "",
+    "logoUrl": "https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/.svg",
+    "deviceType": "forwarder:",
+    "description": "",
+    "connector": "meshblu-",
+    "schemas": {
+      "version": "2.0.0",
+      "configure": {
+        "type": "object",
+        "properties": {
+          "exampleOption": {
+            "title": "example",
+            "type": "string",
+            "required": true
+          }
+        }
+      }
+    }
+  },
+  "splunk": {
+    "name": "Splunk Event Collector",
+    "forwarderId": "splunk-event-collector",
+    "logoUrl": "https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/splunk.svg",
+    "deviceType": "forwarder:splunk",
+    "description": "",
+    "connector": "meshblu-splunk-event-collector",
+    "schemas": {
+      "version": "2.0.0",
+      "configure": {
+        "type": "object",
+        "properties": {
+          "EventCollectorToken": {
+            "title": "Event Collector Token",
+            "type": "string",
+            "required": true
+          },
+          "SplunkEventUrl": {
+            "title": "Splunk Event URL",
+            "type": "string",
+            "required": true
+          }
+        }
+      }
+    }
+  },
+  "tempoiq": {
+    "name": "",
+    "forwarderId": "",
+    "logoUrl": "https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/.svg",
+    "deviceType": "forwarder:",
+    "description": "",
+    "connector": "meshblu-",
+    "schemas": {
+      "version": "2.0.0",
+      "configure": {
+        "type": "object",
+        "properties": {
+          "exampleOption": {
+            "title": "example",
+            "type": "string",
+            "required": true
+          }
+        }
+      }
+    }
+  }
+}

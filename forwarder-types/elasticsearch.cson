@@ -1,0 +1,15 @@
+name: ''
+forwarderId: ''
+logoUrl: 'https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/.svg'
+deviceType: 'forwarder:'
+description: ''
+connector: 'meshblu-'
+schemas:
+  version: '2.0.0'
+  configure:
+    type: 'object'
+    properties:
+      exampleOption:
+        title: 'example'
+        type: 'string'
+        required: true
