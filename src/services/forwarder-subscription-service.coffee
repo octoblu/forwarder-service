@@ -1,19 +1,26 @@
 MeshbluHttp = require 'meshblu-http'
+{Validator} =require 'jsonschema'
 forwarderTypes = require '../forwarder-types/forwarder-types'
 _ = require 'lodash'
 
 class ForwarderSubscriptionService
-  createForwarder: ( forwarderId, config, meshbluAuth,  callback) =>
-    forwarderType = _.find forwarderTypes, (forwarder) ->
-        return forwarder.forwarderId == forwarderId
-    return callback @_createError(400, "Missing Forwarder Id") unless forwarderId
-    return callback @_createError(400, "Missing forwarder config") unless config
-    return callback @_createError(400, "Invalid Forwarder Type") unless forwarderType
+  constructor: ({@meshbluOptions})->
+    @validator = new Validator()
 
 
-    # return callback @_createError(755, 'Not enough dancing!') if hasError?
-    # callback()
+  createForwarder: ( forwarderType, forwarderConfig, meshbluAuth,  callback) =>
 
+    configureSchema = forwarderType.schemas?.configure
+    validationResult = @validator.validate forwarderConfig, configureSchema
+    return callback @_createError(400, "Could not validate config against forwarder type configure schema") unless _.isEmpty result.errors
+    {uuid, token} = meshbluAuth
+    meshbluConfig = _.assign @meshbluOptions, {uuid, token}
+    meshbluHttp = new MeshbluHttp meshbluConfig
+
+    forwarderDeviceOptions = _getForwarderDeviceOptions(forwarderConfig, forwarderType)
+    meshbluHttp.register config, (error, createdForwarder) =>
+      return callback(@_createError 500, error.message )if error
+      return callback(null, createdForwarder)
 
   _createError: (code, message) =>
     error = new Error message

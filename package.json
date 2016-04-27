@@ -41,9 +41,10 @@
     "express": "^4.13.3",
     "express-meshblu-auth": "^5.1.0",
     "express-meshblu-healthcheck": "^1.0.1",
+    "jsonschema": "^1.1.0",
     "lodash": "^4.11.1",
     "meshblu-config": "^4.0.0",
-    "meshblu-http": "^5.1.1",
+    "meshblu-http": "^5.3.2",
     "morgan": "^1.6.1"
   },
   "peerDependencies": {},

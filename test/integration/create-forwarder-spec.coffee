@@ -44,7 +44,7 @@ describe 'Creating a Forwarder', ->
           password: 'some-token'
         json: true
         body:
-          forwarderId: "invalid-forwarder-id"
+          forwarderTypeId: "invalid-forwarder-id"
           config:
             name: 'useless forwarder'
 
@@ -108,7 +108,7 @@ describe 'Creating a Forwarder', ->
           password: 'some-token'
         json: true
         body:
-          forwarderId: "splunk-event-collector"
+          forwarderTypeId: "splunk-event-collector"
 
 
 

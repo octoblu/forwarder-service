@@ -18,11 +18,8 @@ class Server
     @server.address()
 
   run: (callback) =>
-    meshbluAuth = new MeshbluAuth {
-      server: @meshbluConfig.server
-      port: @meshbluConfig.port
-      protocol: @meshbluConfig.protocol
-    }
+    {server, port, protocol} = @meshbluConfig
+    meshbluAuth = new MeshbluAuth {server, port, protocol}
 
     app = express()
     app.use morgan 'dev', immediate: false unless @disableLogging
@@ -36,7 +33,7 @@ class Server
 
     app.options '*', cors()
 
-    forwarderSubscriptionService = new ForwarderSubscriptionService
+    forwarderSubscriptionService = new ForwarderSubscriptionService {server, port,protocol }
     router = new Router {@meshbluConfig, forwarderSubscriptionService}
 
     router.route app
