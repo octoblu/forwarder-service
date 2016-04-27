@@ -18,6 +18,20 @@ The UUID and Token should belong to the user or device that will have subscripti
 ### Get all forwarders /forwarders
 ### Get Forwarder by UUID /forwarders/:UUID
 ### Create Forwarder /forwarders POST
+Creates a new forwarder device
+#### **Input**:
+**__forwarderId__** : The Id of the type of forwarder you want to create
+**__config__*** : The configuration options forwarder device to be created
+````json
+{
+  "forwarderId": "splunk-event-collector",
+  "config": {
+    "name": "My new forwarder",
+    "username":"",
+    "password": ""
+  }
+}
+````
 ### Add Forwarder Subscriptions /forwarders/:UUID/subscriptions PUT
 ### Remove Forwarder subscriptions /forwarders/:UUID/subscriptions DELETE
 
