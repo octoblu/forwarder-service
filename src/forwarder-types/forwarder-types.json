@@ -1,5 +1,5 @@
-{
-  "elasticsearch": {
+[
+  {
     "name": "",
     "forwarderId": "",
     "logoUrl": "https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/.svg",
@@ -20,7 +20,7 @@
       }
     }
   },
-  "mongodb": {
+  {
     "name": "MongoDB Forwarder",
     "forwarderId": "mongodb-forwarder",
     "logoUrl": "https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/mongodb.svg",
@@ -41,7 +41,7 @@
       }
     }
   },
-  "ms-azure": {
+  {
     "name": "",
     "forwarderId": "",
     "logoUrl": "https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/.svg",
@@ -62,7 +62,7 @@
       }
     }
   },
-  "splunk": {
+  {
     "name": "Splunk Event Collector",
     "forwarderId": "splunk-event-collector",
     "logoUrl": "https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/splunk.svg",
@@ -88,7 +88,7 @@
       }
     }
   },
-  "tempoiq": {
+  {
     "name": "",
     "forwarderId": "",
     "logoUrl": "https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/.svg",
@@ -109,4 +109,4 @@
       }
     }
   }
-}
+]

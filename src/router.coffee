@@ -1,11 +1,14 @@
 ForwarderSubscriptionController = require './controllers/forwarder-subscription-controller'
+forwarderTypes = require './forwarder-types/forwarder-types'
 
 class Router
   constructor: ({@forwarderSubscriptionService}) ->
   route: (app) =>
     forwarderSubscriptionController = new ForwarderSubscriptionController {@forwarderSubscriptionService}
 
-    app.get '/hello', forwarderSubscriptionController.hello
-    # e.g. app.put '/resource/:id', someController.update
+    app.post '/forwarders', forwarderSubscriptionController.createForwarder
+
+    app.get '/forwarders/types', (req, res) =>
+      res.status(200).send(forwarderTypes)
 
 module.exports = Router
