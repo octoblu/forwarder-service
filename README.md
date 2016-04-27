@@ -32,6 +32,11 @@ Creates a new forwarder device
   }
 }
 ````
+**Returns**
+`200` if forwarderId maps to a valid forwarderType and the config object can be validated against the
+forwarders configure schema
+
+`400` if the forwarderId and config are invalid or missing
 ### Add Forwarder Subscriptions /forwarders/:UUID/subscriptions PUT
 ### Remove Forwarder subscriptions /forwarders/:UUID/subscriptions DELETE
 
