@@ -8,7 +8,7 @@ class Router
 
     app.post '/forwarders', forwarderSubscriptionController.createForwarder
 
-    app.get '/forwarders/types', (req, res) =>
+    app.get '/types', (req, res) =>
       res.status(200).send(forwarderTypes)
 
 module.exports = Router
