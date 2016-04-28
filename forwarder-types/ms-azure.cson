@@ -1,5 +1,5 @@
 name: ''
-forwarderId: ''
+forwarderTypeId: ''
 logoUrl: 'https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/.svg'
 deviceType: 'forwarder:'
 description: ''

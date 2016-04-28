@@ -1,5 +1,5 @@
 name: 'MongoDB Forwarder'
-forwarderId: 'mongodb-forwarder'
+forwarderTypeId: 'mongodb-forwarder'
 logoUrl: 'https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/mongodb.svg'
 deviceType: 'forwarder:mongodb'
 description: ''

@@ -12,8 +12,5 @@ gulp.task 'build', ->
     .pipe gcson()
     .pipe jsonCombine('forwarder-types.json',  (data) -> new Buffer(JSON.stringify(_.values(data))))
     .pipe gulp.dest './src/forwarder-types'
-
-gulp.task 'watch', ->
-  gulp.watch(['./forwarder-types/**/*.json'], ['build'])
-
-gulp.task 'default', ['clean', 'build', 'watch']
+    
+gulp.task 'default', ['clean', 'build']

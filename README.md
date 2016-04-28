@@ -24,8 +24,8 @@ Creates a new forwarder device
 **__config__*** : The configuration options forwarder device to be created
 ````json
 {
-  "forwarderId": "splunk-event-collector",
-  "config": {
+  "forwarderTypeId": "splunk-event-collector",
+  "configuration": {
     "name": "My new forwarder",
     "username":"",
     "password": ""

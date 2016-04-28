@@ -45,7 +45,7 @@ describe 'Creating a Forwarder', ->
         json: true
         body:
           forwarderTypeId: "invalid-forwarder-id"
-          config:
+          configuration:
             name: 'useless forwarder'
 
 
@@ -77,7 +77,7 @@ describe 'Creating a Forwarder', ->
           password: 'some-token'
         json: true
         body:
-          config:
+          configuration:
             name: 'useless forwarder'
 
 
@@ -89,9 +89,9 @@ describe 'Creating a Forwarder', ->
     it 'should return a 400', ->
       expect(@response.statusCode).to.equal 400
     it 'should tell you that you are missing a forwarderId', ->
-      expect(@body.error).to.equal 'Missing Forwarder Id'
+      expect(@body.error).to.equal 'Missing Forwarder Type Id'
 
-  describe 'when creating a forwarder without a config', ->
+  describe 'when creating a forwarder without a configuration', ->
     beforeEach (done) ->
       userAuth = new Buffer('some-uuid:some-token').toString 'base64'
 
@@ -121,5 +121,5 @@ describe 'Creating a Forwarder', ->
     it 'should return a 400', ->
       expect(@response.statusCode).to.equal 400
 
-    it 'should tell you that you are missing config', ->
-      expect(@body.error).to.equal 'Missing forwarder config'
+    it 'should tell you that you are missing configuration', ->
+      expect(@body.error).to.equal 'Missing forwarder configuration'

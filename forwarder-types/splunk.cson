@@ -1,5 +1,5 @@
 name: 'Splunk Event Collector'
-forwarderId: 'splunk-event-collector'
+forwarderTypeId: 'splunk-event-collector'
 logoUrl: 'https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/splunk.svg'
 deviceType: 'forwarder:splunk'
 description: ''
@@ -13,7 +13,7 @@ schemas:
         title: 'Event Collector Token'
         type: 'string'
         required: true
-      SplunkEventUrl: 
+      SplunkEventUrl:
         title: 'Splunk Event URL'
         type: 'string'
         required: true

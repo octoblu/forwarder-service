@@ -15,8 +15,8 @@
     "url": "https://github.com/octoblu/forwarder-subscription.git"
   },
   "scripts": {
-    "start": "node command.js",
-    "test": "mocha"
+    "start": "gulp && node command.js",
+    "test": "gulp && mocha"
   },
   "devDependencies": {
     "@octoblu/shmock": "^0.7.2",
