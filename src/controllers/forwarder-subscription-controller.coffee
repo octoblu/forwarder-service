@@ -10,6 +10,7 @@ class ForwarderSubscriptionController
 
     {configuration, forwarderTypeId} = request.body
     forwarderType = @_findForwarderType(forwarderTypeId)
+    console.log "Forwarder Type", forwarderType
 
     return response.status(400).send(error: "Missing Forwarder Type Id") unless forwarderTypeId
     return response.status(400).send(error: "Missing forwarder configuration") unless configuration
@@ -17,8 +18,6 @@ class ForwarderSubscriptionController
 
     {meshbluAuth} = request
     @forwarderSubscriptionService.createForwarder forwarderType, configuration, meshbluAuth, (error, createdForwarder) =>
-      console.log "The return from the service is"
-
       return response.status(error.code || 500).send(error: error.message) if error?
       response.status(201).send(createdForwarder)
 

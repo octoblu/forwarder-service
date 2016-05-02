@@ -19,6 +19,7 @@ class Server
 
   run: (callback) =>
     {server, port, protocol} = @meshbluConfig
+    console.log "Meshblu Config from server", @meshbluConfig
     meshbluAuth = new MeshbluAuth {server, port, protocol}
 
     app = express()
@@ -33,7 +34,7 @@ class Server
 
     app.options '*', cors()
 
-    forwarderSubscriptionService = new ForwarderSubscriptionService {server, port,protocol }
+    forwarderSubscriptionService = new ForwarderSubscriptionService {server, port, protocol }
     router = new Router {@meshbluConfig, forwarderSubscriptionService}
 
     router.route app
