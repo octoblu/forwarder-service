@@ -19,7 +19,6 @@
     "test": "gulp && mocha"
   },
   "devDependencies": {
-    "@octoblu/shmock": "^0.7.2",
     "chai": "^3.4.1",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
@@ -30,6 +29,7 @@
     "mocha-istanbul": "^0.2.0",
     "nock": "^8.0.0",
     "request": "^2.66.0",
+    "shmock": "^0.8.1",
     "sinon": "^1.17.2",
     "sinon-chai": "^2.8.0"
   },

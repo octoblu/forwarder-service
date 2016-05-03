@@ -1,6 +1,6 @@
 http    = require 'http'
 request = require 'request'
-shmock  = require '@octoblu/shmock'
+shmock  = require 'shmock'
 Server  = require '../../src/server'
 moment  = require 'moment'
 _       = require 'lodash'
@@ -55,7 +55,7 @@ describe 'Creating a Forwarder', ->
       request.post options, (error, @response, @body) =>
         done error
 
-    xit 'should auth handler', ->
+    it 'should auth handler', ->
       @authDevice.done()
 
     it 'should return a 400', ->
@@ -194,3 +194,6 @@ describe 'Creating a Forwarder', ->
 
     it 'should register the device with meshblu',  ->
       expect(@registerDeviceHandler.isDone).to.equal true
+
+    it 'should set the body to the registered device', ->
+      expect(@body).to.deep.equal(@registeredDevice)
