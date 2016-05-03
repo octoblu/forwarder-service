@@ -52,13 +52,11 @@ describe 'Creating a Forwarder', ->
             name: 'useless forwarder'
 
 
-
-
       request.post options, (error, @response, @body) =>
         done error
 
-    # xit 'should auth handler', ->
-    #   @authDevice.done()
+    xit 'should auth handler', ->
+      @authDevice.done()
 
     it 'should return a 400', ->
       expect(@response.statusCode).to.equal 400
@@ -82,9 +80,6 @@ describe 'Creating a Forwarder', ->
         body:
           configuration:
             name: 'useless forwarder'
-
-
-
 
       request.post options, (error, @response, @body) =>
         done error
@@ -123,7 +118,7 @@ describe 'Creating a Forwarder', ->
     it 'should tell you that you are missing configuration', ->
       expect(@body.error).to.equal 'Missing forwarder configuration'
 
-  describe.only 'when creating a forwarder with valid config options', ->
+  describe 'when creating a forwarder with valid config options', ->
     beforeEach (done) ->
       userAuth = new Buffer('some-uuid:some-token').toString('base64')
       registerDeviceOptions =
@@ -149,10 +144,9 @@ describe 'Creating a Forwarder', ->
                 required: true
         forwarderSubscriptions:{}
         online: true
+        logoUrl: "https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/splunk.svg"
         meshblu:
           version: "2.0.0"
-          createdAt: moment().utc().format()
-          hash: "some-really-long-hash"
           whitelists:
             discover:
               view: [{uuid: "some-uuid"}]
