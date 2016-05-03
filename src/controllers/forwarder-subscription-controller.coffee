@@ -6,6 +6,7 @@ class ForwarderSubscriptionController
     forwarderType = _.find forwarderTypes, (forwarderType) ->
         return forwarderType.forwarderTypeId == forwarderTypeId
 
+
   createForwarder: (request, response) =>
 
     {configuration, forwarderTypeId} = request.body
@@ -26,4 +27,7 @@ class ForwarderSubscriptionController
       return response.status(error.code || 500).send(error: error.message) if error?
       response.status(200).send(forwarders)
 
+  deleteForwarder: (request,response) =>
+    response.status(400).send(error: "TODO")
+    
 module.exports = ForwarderSubscriptionController

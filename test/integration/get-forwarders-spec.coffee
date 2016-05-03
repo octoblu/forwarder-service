@@ -38,7 +38,7 @@ describe 'Get forwarders', ->
   afterEach (done) ->
     @meshblu.close done
 
-  describe 'when there are no forwarders', ->
+  describe 'when there are no devices', ->
     beforeEach (done) ->
 
       @myDeviceHandler = @meshblu

@@ -14,14 +14,14 @@ meshblu_auth_uuid
 meshblu_auth_token
 ````
 The UUID and Token should belong to the user or device that will have subscriptions created on their behalf
-### Get Forwarder Types /forwarders/types GET
-### Get all forwarders /forwarders
+### Get Forwarder Types /types GET
+### Get all forwarders /forwarders GET
 ### Get Forwarder by UUID /forwarders/:UUID
+### Get Forwarder Subscriptions /forwarders/:uuid/subscriptions
 ### Create Forwarder /forwarders POST
-Creates a new forwarder device
 #### **Input**:
-**__forwarderId__** : The Id of the type of forwarder you want to create
-**__config__*** : The configuration options forwarder device to be created
+**__forwarderTypeId__** : The Id of the type of forwarder you want to create
+**__configuration__** : The configuration options forwarder device to be created
 ````json
 {
   "forwarderTypeId": "splunk-event-collector",
@@ -37,7 +37,14 @@ Creates a new forwarder device
 forwarders configure schema
 
 `400` if the forwarderId and config are invalid or missing
-### Add Forwarder Subscriptions /forwarders/:UUID/subscriptions PUT
+
+### Add Forwarder Subscription /forwarders/:uuid/subscriptions PUT
+Will create a message subscriptions where the forwarder with the given uuid will
+subscribe to messages of a given devices. If the message subscription already exists
+the subscription will not be created.
+
+
+
 ### Remove Forwarder subscriptions /forwarders/:UUID/subscriptions DELETE
 
 Register a new forwarder with the forwarder options in the body of the request

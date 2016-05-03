@@ -126,8 +126,8 @@ describe 'Creating a Forwarder', ->
         EventCollectorToken: "1231231231"
         SplunkEventUrl: "https://hello.splunk.io"
         owner: "some-uuid"
-        connector: "meshblu-splunk-event-collector"
-        forwarderTypeId: "splunk-event-collector"
+        connector: "meshblu-forwarder-splunk"
+        forwarderTypeId: "meshblu-forwarder-splunk"
         type: "forwarder:splunk"
         schemas:
           version: '1.0.0'
@@ -179,7 +179,7 @@ describe 'Creating a Forwarder', ->
           password: 'some-token'
         json: true
         body:
-          forwarderTypeId: "splunk-event-collector"
+          forwarderTypeId: "meshblu-forwarder-splunk"
           configuration:
             name: "My new forwarder"
             EventCollectorToken: "1231231231"
