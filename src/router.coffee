@@ -7,6 +7,7 @@ class Router
     forwarderSubscriptionController = new ForwarderSubscriptionController {@forwarderSubscriptionService}
 
     app.post '/forwarders', forwarderSubscriptionController.createForwarder
+    app.get '/forwarders', forwarderSubscriptionController.getForwarders
 
     app.get '/types', (req, res) =>
       res.status(200).send(forwarderTypes)

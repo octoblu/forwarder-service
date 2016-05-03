@@ -163,7 +163,6 @@ describe 'Creating a Forwarder', ->
         token: "my-forwarder-token"
         },
         registerDeviceOptions
-      console.log "Registered Device", @registeredDevice
       @authDevice = @meshblu
         .get '/v2/whoami'
         .set 'Authorization', "Basic #{userAuth}"

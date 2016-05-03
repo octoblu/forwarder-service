@@ -5,10 +5,9 @@ _ = require 'lodash'
 
 class ForwarderSubscriptionService
   constructor: (@meshbluOptions)->
-    console.log "Meshblu Options", @meshbluOptions
     @validator = new Validator()
 
-  _getForwarderDeviceOptions: (forwarderType, forwarderConfig, meshbluAuth ) =>
+  _getForwarderDeviceOptions: (forwarderType, forwarderConfig, meshbluAuth ) ->
     forwarderTypeOptions =
       connector: forwarderType.connector
       forwarderTypeId: forwarderType.forwarderTypeId
@@ -32,7 +31,6 @@ class ForwarderSubscriptionService
             from: [{uuid: meshbluAuth.uuid}]
 
     forwarderDeviceOptions = _.assign {},forwarderConfig,forwarderTypeOptions
-    console.log "ForwarderTypeOptions", forwarderDeviceOptions
     return forwarderDeviceOptions
 
   createForwarder: ( forwarderType, forwarderConfig, meshbluAuth,  callback) =>
@@ -45,13 +43,20 @@ class ForwarderSubscriptionService
     meshbluHttp = new MeshbluHttp meshbluConfig
 
     forwarderDeviceOptions = @_getForwarderDeviceOptions(forwarderType, forwarderConfig, meshbluAuth)
-    console.log "ForwarderDeviceOptions",  forwarderDeviceOptions
     meshbluHttp.register forwarderDeviceOptions, (error, createdForwarder) =>
-      console.error('error', error)
       return callback(@_createError 500, error.message )if error
       return callback(null, createdForwarder)
 
-  _createError: (code, message) =>
+  getForwarders:({uuid, token}, callback=->) =>
+    meshbluConfig = _.assign @meshbluOptions, {uuid, token}
+    meshbluHttp = new MeshbluHttp meshbluConfig
+    meshbluHttp.devices {owner: uuid}, (error, results) =>
+      return callback(@_createError 500, error.message) if error
+      forwarderDevices = _.filter results?.devices, (mydevice) ->
+        mydevice.type? and _.startsWith(mydevice.type, 'forwarder')
+      return callback null, forwarderDevices || []
+
+  _createError: (code, message) ->
     error = new Error message
     error.code = code if code?
     return error
