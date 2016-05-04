@@ -9,6 +9,9 @@ class Router
     app.post '/forwarders', forwarderSubscriptionController.createForwarder
     app.get '/forwarders', forwarderSubscriptionController.getForwarders
     app.delete '/forwarders/:uuid', forwarderSubscriptionController.deleteForwarder
+    app.get '/forwarders/:uuid/subscriptions', forwarderSubscriptionController.getForwarderSubscriptions
+    app.put '/forwarders/:uuid/subscriptions', forwarderSubscriptionController.addForwarderSubscriptions
+    app.delete '/forwarders/:uuid/subscriptions', forwarderSubscriptionController.removeForwarderSubscriptions
     app.get '/types', (req, res) =>
       res.status(200).send(forwarderTypes)
 

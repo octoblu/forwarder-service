@@ -47,6 +47,16 @@ class ForwarderSubscriptionService
       return callback(@_createError 500, error.message )if error
       return callback(null, createdForwarder)
 
+  deleteForwarder: ({uuid, token}, forwarderUUID, callback=->)=>
+    meshbluConfig = _.assign @meshbluOptions, {uuid, token}
+    meshbluHttp = new MeshbluHttp meshbluConfig
+    meshbluHttp.device forwarderUUID, (error, deviceResults) =>
+      return callback(@_createError 404, "Forwarder not found" ) if error?
+      return callback(@_createError 404, "Forwarder not found" ) unless deviceResults
+      meshbluHttp.unregister {uuid: forwarderUUID}, (error, deviceResult) =>
+        return callback(@_createError 500, "Could not delete forwarder" ) if error?
+        callback null, deviceResult
+
   getForwarders:({uuid, token}, callback=->) =>
     meshbluConfig = _.assign @meshbluOptions, {uuid, token}
     meshbluHttp = new MeshbluHttp meshbluConfig
@@ -54,7 +64,14 @@ class ForwarderSubscriptionService
       return callback(@_createError 500, error.message) if error
       forwarderDevices = _.filter results?.devices, (mydevice) ->
         mydevice.type? and _.startsWith(mydevice.type, 'forwarder')
+
       return callback null, forwarderDevices || []
+
+  getForwarderSubscriptions:(meshbluAuth, forwarderUUID,  callback =->) =>
+
+  addForwarderSubscriptions: (meshbluAuth, forwarderUUID,  callback =->) =>
+
+  removeForwarderSubscriptions: (meshbluAuth, forwarderUUID,  callback =->) =>
 
   _createError: (code, message) ->
     error = new Error message
