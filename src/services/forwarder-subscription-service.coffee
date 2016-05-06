@@ -69,7 +69,21 @@ class ForwarderSubscriptionService
 
   getForwarderSubscriptions:(meshbluAuth, forwarderUUID,  callback =->) =>
 
-  addForwarderSubscriptions: (meshbluAuth, forwarderUUID,  callback =->) =>
+  addForwarderSubscriptions: (meshbluAuth, forwarderUUID, subscriptions,  callback =->) =>
+    meshbluConfig = _.assign @meshbluOptions, meshbluAuth
+    meshbluHttp = new MeshbluHttp meshbluConfig
+    meshbluHttp.device forwarderUUID, (error, deviceResults) =>
+      return callback(@_createError 404, "Forwarder not found" ) if error?
+      return callback(@_createError 404, "Forwarder not found" ) unless deviceResults
+      forwarder = deviceResults.devices[0]
+      # messageSentSubscriptions = subscriptions['message.sent']
+      # messageReceivedSubscriptions = subsciptions['message.received']
+      # broadcastSentSubscriptions = subscriptions['broadcastReceived']
+      #iterate over the list for each of the subscription types
+      #Check if the forwarder is already subscribed to the device
+      #If not subscribed then fetch then check if the authorized meshblu account owns the device
+      #Create the subscription
+
 
   removeForwarderSubscriptions: (meshbluAuth, forwarderUUID,  callback =->) =>
 
