@@ -36,18 +36,19 @@ xdescribe 'Adding Forwarder Subscriptions', ->
   afterEach (done) ->
     @meshblu.close done
 
-  describe 'Add a message.sent subscription', ->
+  describe 'Add a broadcast subscription', ->
     context 'when trying to add a subscription for a device with a UUID NOT in my list of devices', ->
       beforeEach (done) ->
         @forwarder =
           uuid: "forwarder-uuid"
           type: "forwarder:mongodb"
+          owner: ""
           forwarders: {
             version: "1.0.0"
-            subscriptions: {
-              message:
-                sent: [uuid: 'blink-1-uuid']
-            }
+          }
+          meshblu: {
+            version: "2.0.0"
+
           }
         @myEmitterDeviceHandler = @meshblu
           .get '/v2/devices/not-in-the-list-uuid'
