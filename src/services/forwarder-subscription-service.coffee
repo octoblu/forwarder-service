@@ -47,13 +47,13 @@ class ForwarderSubscriptionService
       return callback(@_createError 500, error.message )if error
       return callback(null, createdForwarder)
 
-  deleteForwarder: ({uuid, token}, forwarderUUID, callback=->)=>
+  deleteForwarder: ({uuid, token}, forwarderUuid, callback=->)=>
     meshbluConfig = _.assign @meshbluOptions, {uuid, token}
     meshbluHttp = new MeshbluHttp meshbluConfig
-    meshbluHttp.device forwarderUUID, (error, deviceResults) =>
+    meshbluHttp.device forwarderUuid, (error, deviceResults) =>
       return callback(@_createError 404, "Forwarder not found" ) if error?
       return callback(@_createError 404, "Forwarder not found" ) unless deviceResults
-      meshbluHttp.unregister {uuid: forwarderUUID}, (error, deviceResult) =>
+      meshbluHttp.unregister {uuid: forwarderUuid}, (error, deviceResult) =>
         return callback(@_createError 500, "Could not delete forwarder" ) if error?
         callback null, deviceResult
 
@@ -67,25 +67,20 @@ class ForwarderSubscriptionService
 
       return callback null, forwarderDevices || []
 
-  getForwarderSubscriptions:(meshbluAuth, forwarderUUID,  callback =->) =>
+  getForwarderSubscriptions:(meshbluAuth, forwarderUuid,  callback =->) =>
 
-  addForwarderSubscriptions: (meshbluAuth, forwarderUUID, subscriptions,  callback =->) =>
+  addForwarderSubscription: ({meshbluAuth, forwarderUuid, subscription},  callback =->) =>
     meshbluConfig = _.assign @meshbluOptions, meshbluAuth
     meshbluHttp = new MeshbluHttp meshbluConfig
-    meshbluHttp.device forwarderUUID, (error, deviceResults) =>
-      return callback(@_createError 404, "Forwarder not found" ) if error?
-      return callback(@_createError 404, "Forwarder not found" ) unless deviceResults
-      forwarder = deviceResults.devices[0]
-      # messageSentSubscriptions = subscriptions['message.sent']
-      # messageReceivedSubscriptions = subsciptions['message.received']
-      # broadcastSentSubscriptions = subscriptions['broadcastReceived']
-      #iterate over the list for each of the subscription types
-      #Check if the forwarder is already subscribed to the device
-      #If not subscribed then fetch then check if the authorized meshblu account owns the device
-      #Create the subscription
+    update =
+      $addToSet:
+        'meshblu.whitelists.broadcast.sent': forwarderUuid
 
+    meshbluHttp.updateDangerously subscription.emitterUuid, update, (error) =>
+      return callback(@_createError 403, "Cannot modify #{subscription.emitterUuid}" ) if error?
+      callback()
 
-  removeForwarderSubscriptions: (meshbluAuth, forwarderUUID,  callback =->) =>
+  removeForwarderSubscriptions: (meshbluAuth, forwarderUuid,  callback =->) =>
 
   _createError: (code, message) ->
     error = new Error message

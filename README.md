@@ -13,7 +13,7 @@ All APIs should have the following fields in the header of the HTTP request
 meshblu_auth_uuid
 meshblu_auth_token
 ````
-The UUID and Token should belong to the user or device that will have subscriptions created on their behalf
+The Uuid and Token should belong to the user or device that will have subscriptions created on their behalf
 ### Get Forwarder Types /types GET
 Get the list of forwarder types.
 Returns `200` with forwarder types
@@ -43,7 +43,7 @@ Returns `200` with forwarder types
 ````
 ### Get all forwarders /forwarders GET
 Returns the list of forwarders that the
-### Get Forwarder by UUID /forwarders/:UUID
+### Get Forwarder by Uuid /forwarders/:Uuid
 ### Get Forwarder Subscriptions /forwarders/:uuid/subscriptions
 ### Create Forwarder /forwarders POST
 #### **Input**:
@@ -72,7 +72,7 @@ the subscription will not be created.
 
 
 
-### Remove Forwarder subscriptions /forwarders/:UUID/subscriptions DELETE
+### Remove Forwarder subscriptions /forwarders/:Uuid/subscriptions DELETE
 
 Register a new forwarder with the forwarder options in the body of the request
 Input:
@@ -110,14 +110,14 @@ Responses:
 ### Create forwarder message subscriptions for devices /forwarder/:forwarder_uuid/subscribe PUT
 Input:
 __devices__ - Arr
-  - Device UUIDs
-  - Forwarder UUID
+  - Device Uuids
+  - Forwarder Uuid
   - Subscription Type
 Remove Message subscriptions from devices
-  - Device UUIDs
-  - Forwarder UUID
+  - Device Uuids
+  - Forwarder Uuid
   - Subscription type (Broadcast | Send | Receive)
-Add Device Message Subscription (Device UUID, Forwarder UUID, Subscription Type (Broadcast | Send | Receive))
+Add Device Message Subscription (Device Uuid, Forwarder Uuid, Subscription Type (Broadcast | Send | Receive))
 Remove Device message subscription
-  - Device UUID
-  - Forwarder UUID
+  - Device Uuid
+  - Forwarder Uuid

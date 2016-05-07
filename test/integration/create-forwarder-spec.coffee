@@ -58,8 +58,8 @@ describe 'Creating a Forwarder', ->
     it 'should auth handler', ->
       @authDevice.done()
 
-    it 'should return a 400', ->
-      expect(@response.statusCode).to.equal 400
+    it 'should return a 422', ->
+      expect(@response.statusCode).to.equal 422
 
   describe 'when trying to create a forwarder without a forwarderId', ->
     beforeEach (done) ->
@@ -84,8 +84,8 @@ describe 'Creating a Forwarder', ->
       request.post options, (error, @response, @body) =>
         done error
 
-    it 'should return a 400', ->
-      expect(@response.statusCode).to.equal 400
+    it 'should return a 422', ->
+      expect(@response.statusCode).to.equal 422
     it 'should tell you that you are missing a forwarderId', ->
       expect(@body.error).to.equal 'Missing Forwarder Type Id'
 
@@ -112,8 +112,8 @@ describe 'Creating a Forwarder', ->
         done error
 
 
-    it 'should return a 400', ->
-      expect(@response.statusCode).to.equal 400
+    it 'should return a 422', ->
+      expect(@response.statusCode).to.equal 422
 
     it 'should tell you that you are missing configuration', ->
       expect(@body.error).to.equal 'Missing forwarder configuration'

@@ -5,7 +5,7 @@ Server  = require '../../src/server'
 moment  = require 'moment'
 _       = require 'lodash'
 
-xdescribe 'Adding Forwarder Subscriptions', ->
+describe 'Adding Forwarder Subscriptions', ->
   beforeEach (done) ->
     @meshblu = shmock 0xd00d
     @userAuth = new Buffer('some-uuid:some-token').toString 'base64'
@@ -37,7 +37,7 @@ xdescribe 'Adding Forwarder Subscriptions', ->
     @meshblu.close done
 
   describe 'Add a broadcast subscription', ->
-    context 'when trying to add a subscription for a device with a UUID NOT in my list of devices', ->
+    context 'when trying to add a subscription for a device that I cannot modify', ->
       beforeEach (done) ->
         @forwarder =
           uuid: "forwarder-uuid"
@@ -51,13 +51,10 @@ xdescribe 'Adding Forwarder Subscriptions', ->
 
           }
         @myEmitterDeviceHandler = @meshblu
-          .get '/v2/devices/not-in-the-list-uuid'
+          .put '/v2/devices/not-in-the-list-uuid'
           .set 'Authorization', "Basic #{@userAuth}"
-          .reply 404
-        @myForwarderDeviceHandler = @meshblu
-          .get '/v2/devices/forwarder-uuid'
-          .set 'Authorization', "Basic #{@userAuth}"
-          .reply 200, {devices: [@forwarder]}
+          .send {$addToSet: {"meshblu.whitelists.broadcast.sent": "forwarder-uuid"}}
+          .reply 403
 
         options =
           auth:
@@ -65,21 +62,19 @@ xdescribe 'Adding Forwarder Subscriptions', ->
             password: 'some-token'
           json: true
           body:
-            subscriptions:
-              message:
-                sent: [uuid: 'not-in-the-list-uuid']
+            emitterUuid: 'not-in-the-list-uuid', type: 'broadcast.sent'
 
-        request.put "http://localhost:#{@serverPort}/forwarders/forwarder-uuid/subscriptions",options,
+        request.post "http://localhost:#{@serverPort}/forwarders/forwarder-uuid/subscriptions",options,
           (error, @response, @body) =>
             done error
 
-      it 'should return a 400', ->
-        expect(@response.statusCode).to.equal 400
+      it 'should return a 403', ->
+        expect(@response.statusCode).to.equal 403
 
-      it 'should return an error message saying that the UUID is not in the list of owned devices', ->
-        expect (@body.error).to.equal "UUID is not in the list of owned devices"
+      it 'should return an error message saying that the Uuid is not in the list of owned devices', ->
+        expect(@body.error).to.equal "Cannot modify not-in-the-list-uuid"
 
-    xcontext 'when trying to add a subscription for a device with a UUID in my list of devices', ->
+    xcontext 'when trying to add a subscription for a device with a Uuid in my list of devices', ->
       it 'should add the subscription', ->
       it 'should return a 201', ->
       it 'return the map of forwarder subsciptions', ->
@@ -89,10 +84,10 @@ xdescribe 'Adding Forwarder Subscriptions', ->
       it 'return the map of forwarder subsciptions', ->
 
 
-  xdescribe 'Add a message.received subscription', ->
-    context 'when trying to add a subscription for a device with a UUID NOT in my list of devices', ->
-    context 'when trying to add a subscription for a device with a UUID in my list of devices', ->
+  xdescribe 'Add a message received subscription subscription', ->
+    context 'when trying to add a subscription for a device with a Uuid NOT in my list of devices', ->
+    context 'when trying to add a subscription for a device with a Uuid in my list of devices', ->
 
   xdescribe 'Add a broadcast.sent subscription', ->
-    context 'when trying to add a subscription for a device with a UUID NOT in my list of devices', ->
-    context 'when trying to add a subscription for a device with a UUID in my list of devices', ->
+    context 'when trying to add a subscription for a device with a Uuid NOT in my list of devices', ->
+    context 'when trying to add a subscription for a device with a Uuid in my list of devices', ->

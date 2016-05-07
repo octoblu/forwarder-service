@@ -36,7 +36,7 @@ describe 'Delete Forwarder', ->
   afterEach (done) ->
     @meshblu.close done
 
-  describe 'when given a blank UUID', ->
+  describe 'when given a blank Uuid', ->
     beforeEach (done) ->
       options =
         auth:
@@ -46,13 +46,13 @@ describe 'Delete Forwarder', ->
       request.delete "http://localhost:#{@serverPort}/forwarders", options, (error, @response, @body) =>
         done error
 
-    it 'should return a 400', ->
+    it 'should return a 404', ->
       expect(@response.statusCode).to.equal 404
 
-    # it 'should tell you that you that the forwarder UUID is missing', ->
-    #   expect(@body.error).to.equal 'Missing Forwarder UUID'
+    # it 'should tell you that you that the forwarder Uuid is missing', ->
+    #   expect(@body.error).to.equal 'Missing Forwarder Uuid'
 
-  describe 'when given an invalid UUID that is does not belong to one of my devices', ->
+  describe 'when given an invalid Uuid that is does not belong to one of my devices', ->
     beforeEach (done) ->
       @myDeviceHandler = @meshblu
         .get '/v2/devices/invalid-forwarder-uuid'
@@ -78,7 +78,7 @@ describe 'Delete Forwarder', ->
       console.log "Body", @body
       expect(@body.error).to.equal 'Forwarder not found'
 
-  describe 'when given a valid Forwarder UUID', ->
+  describe 'when given a valid Forwarder Uuid', ->
     beforeEach (done) ->
       @myDeviceHandler = @meshblu
         .get '/v2/devices/forwarder-elasticsearch-uuid'
