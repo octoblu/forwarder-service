@@ -53,7 +53,7 @@ describe 'Adding Forwarder Subscriptions', ->
         @myEmitterDeviceHandler = @meshblu
           .put '/v2/devices/not-in-the-list-uuid'
           .set 'Authorization', "Basic #{@userAuth}"
-          .send {$addToSet: {"meshblu.whitelists.broadcast.sent": "forwarder-uuid"}}
+          .send {$addToSet: {"meshblu.whitelists.broadcast.sent": {uuid: "forwarder-uuid"}}}
           .reply 403
 
         options =
@@ -74,20 +74,37 @@ describe 'Adding Forwarder Subscriptions', ->
       it 'should return an error message saying that the Uuid is not in the list of owned devices', ->
         expect(@body.error).to.equal "Cannot modify not-in-the-list-uuid"
 
-    xcontext 'when trying to add a subscription for a device with a Uuid in my list of devices', ->
-      it 'should add the subscription', ->
+    context 'when trying to add a subscription for a device that I can configure', ->
+      beforeEach 'set up subscription meshblu calls', ->
+        @myEmitterDeviceHandler = @meshblu
+          .put '/v2/devices/emitter-uuid'
+          .set 'Authorization', "Basic #{@userAuth}"
+          .send {$addToSet: {"meshblu.whitelists.broadcast.sent": {uuid: "forwarder-uuid"}}}
+          .reply 204
+
+        @createSubscriptionHandler = @meshblu
+          .post '/v2/devices/forwarder-uuid/subscriptions/emitter-uuid/broadcast.sent'
+          .set 'Authorization', "Basic #{@userAuth}"
+          .send()
+          .reply 201
+
+      beforeEach 'make the call', (done) ->
+        options =
+          auth:
+            username: 'some-uuid'
+            password: 'some-token'
+          json: true
+          body:
+            emitterUuid: 'emitter-uuid', type: 'broadcast.sent'
+
+        request.post "http://localhost:#{@serverPort}/forwarders/forwarder-uuid/subscriptions", options,
+          (error, @response) => done()
+
+      it 'should update the whitelist', ->
+        @myEmitterDeviceHandler.done()
+
+      it 'should create the subscription', ->
+        @createSubscriptionHandler.done()
+
       it 'should return a 201', ->
-      it 'return the map of forwarder subsciptions', ->
-    xcontext 'when trying to add a duplicate subscription for a device that already has a subscription', ->
-      it 'should add the subscription', ->
-      it 'should return a 200', ->
-      it 'return the map of forwarder subsciptions', ->
-
-
-  xdescribe 'Add a message received subscription subscription', ->
-    context 'when trying to add a subscription for a device with a Uuid NOT in my list of devices', ->
-    context 'when trying to add a subscription for a device with a Uuid in my list of devices', ->
-
-  xdescribe 'Add a broadcast.sent subscription', ->
-    context 'when trying to add a subscription for a device with a Uuid NOT in my list of devices', ->
-    context 'when trying to add a subscription for a device with a Uuid in my list of devices', ->
+        expect(@response.statusCode).to.equal 201
