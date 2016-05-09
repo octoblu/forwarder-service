@@ -41,7 +41,7 @@ class ForwarderSubscriptionController
   addForwarderSubscription: (request, response) =>
     {meshbluAuth, params, body} = request
     subscription = body
-    forwarderUuid = params.uuid  
+    forwarderUuid = params.uuid
 
     return response.status(422).send(error: "Missing emitterUuid") unless subscription.emitterUuid?
     return response.status(422).send(error: "Missing type") unless subscription.type?
@@ -52,7 +52,12 @@ class ForwarderSubscriptionController
         return response.sendStatus(201)
     )
 
-  removeForwarderSubscriptions: (request, response) =>
+  removeForwarderSubscription: (request, response) =>
+    {meshbluAuth} = request
+    {forwarderUuid, emitterUuid, type} = request.params
+    @forwarderSubscriptionService.removeForwarderSubscription {meshbluAuth, forwarderUuid, emitterUuid, type}, (error) =>
+      return response.status(error.code || 500).send(error: error.message) if error?
+      return response.sendStatus(204)
 
 
 
