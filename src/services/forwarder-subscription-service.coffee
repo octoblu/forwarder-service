@@ -60,12 +60,12 @@ class ForwarderSubscriptionService
   getForwarders:({uuid, token}, callback) =>
     meshbluConfig = _.assign @meshbluOptions, {uuid, token}
     meshbluHttp = new MeshbluHttp meshbluConfig
-    meshbluHttp.devices {owner: uuid}, (error, results) =>
-      return callback(@_createError 500, error.message) if error
-      forwarderDevices = _.filter results?.devices, (mydevice) ->
-        mydevice.type? and _.startsWith(mydevice.type, 'forwarder')
+    query =
+      owner: uuid
+      $exists:
+        forwarder: true
 
-      return callback null, forwarderDevices || []
+    meshbluHttp.search query, {}, callback
 
   getForwarderSubscriptions:(meshbluAuth, forwarderUuid,  callback ) =>
 

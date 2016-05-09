@@ -15,8 +15,6 @@ describe 'Get forwarders', ->
       .set 'Authorization', "Basic #{@userAuth}"
       .reply 200, uuid: 'some-uuid', token: 'some-token'
 
-
-
     serverOptions =
       port: undefined,
       disableLogging: true
@@ -38,21 +36,26 @@ describe 'Get forwarders', ->
   afterEach (done) ->
     @meshblu.close done
 
+  beforeEach ->
+    @deviceQuery =
+      owner: "some-uuid"
+      $exists:
+        forwarder: true
+
   describe 'when there are no devices', ->
     beforeEach (done) ->
 
       @myDeviceHandler = @meshblu
-        .get '/v2/devices'
-        .query {owner: "some-uuid"}
+        .post '/search/devices'
         .set 'Authorization', "Basic #{@userAuth}"
-        .reply 200, {devices:[]}
+        .send @deviceQuery
+        .reply 200, []
 
       options =
         auth:
           username: 'some-uuid'
           password: 'some-token'
         json: true
-
 
       request.get "http://localhost:#{@serverPort}/forwarders", options, (error, @response, @body) =>
         done error
@@ -66,96 +69,8 @@ describe 'Get forwarders', ->
     it 'should return no an empty list', ->
       expect(@body).to.deep.equal([])
 
-  describe 'when the octoblu user has no forwarders in the list of owned devices', ->
-    beforeEach (done) ->
-      @mydevices = [
-        {
-          name: "Device 1"
-          uuid: "device-1-uuid"
-          token: "device-1-token"
-          type: "device:1"
-          owner: "some-uuid"
-        },
-        {
-          name: "Device 2"
-          uuid: "device-2-uuid"
-          token: "device-2-token"
-          type: "device:2"
-          owner: "some-uuid"
-        },
-        {
-          name: "Device 3"
-          uuid: "device-3-uuid"
-          token: "device-3-token"
-          type: "device:3"
-          owner: "some-uuid"
-        },
-        {
-          name: "Device 4"
-          uuid: "device-4-uuid"
-          token: "device-4-token"
-          type: "device:4"
-          owner: "some-uuid"
-        }
-      ]
-      @myDeviceHandler = @meshblu
-        .get '/v2/devices'
-        .query {owner: "some-uuid"}
-        .set 'Authorization', "Basic #{@userAuth}"
-        .reply 200, {devices:@mydevices}
-
-      options =
-        auth:
-          username: 'some-uuid'
-          password: 'some-token'
-        json: true
-
-
-      request.get "http://localhost:#{@serverPort}/forwarders", options, (error, @response, @body) =>
-        done error
-
-    it 'should fetch the devices from meshblu', ->
-      @myDeviceHandler.done()
-
-    it 'should return a 200', ->
-      expect(@response.statusCode).to.equal 200
-
-    it 'should return an empty list of forwarders', ->
-      expect(@body).to.deep.equal []
-
   describe 'when the octoblu user has forwarders in the list of owned devices', ->
     beforeEach (done) ->
-      @mydevices = [
-        {
-          name: "Device 1"
-          uuid: "device-1-uuid"
-          token: "device-1-token"
-          type: "device:1"
-          owner: "some-uuid"
-        },
-        {
-          name: "Device 2"
-          uuid: "device-2-uuid"
-          token: "device-2-token"
-          type: "device:2"
-          owner: "some-uuid"
-        },
-        {
-          name: "Splunk Forwarder"
-          uuid: "forwarder-splunk-uuid"
-          token: "forwarder-splunk-token"
-          type: "forwarder:splunk"
-          owner: "some-uuid"
-        },
-        {
-          name: "Elastic Search Forwarder"
-          uuid: "forwarder-elasticsearch-uuid"
-          token: "forwarder-elasticsearch-token"
-          type: "forwarder:elasticsearch"
-          owner: "some-uuid"
-        }
-      ]
-
       @forwarders = [{
         name: "Splunk Forwarder"
         uuid: "forwarder-splunk-uuid"
@@ -172,10 +87,10 @@ describe 'Get forwarders', ->
       }]
 
       @myDeviceHandler = @meshblu
-        .get '/v2/devices'
-        .query {owner: "some-uuid"}
+        .post '/search/devices'
         .set 'Authorization', "Basic #{@userAuth}"
-        .reply 200, {devices: @mydevices}
+        .send @deviceQuery
+        .reply 200, @forwarders
 
         options =
           auth:
@@ -183,9 +98,9 @@ describe 'Get forwarders', ->
             password: 'some-token'
           json: true
 
+      request.get "http://localhost:#{@serverPort}/forwarders", options, (error, @response, @body) =>
+        done error
 
-        request.get "http://localhost:#{@serverPort}/forwarders", options, (error, @response, @body) =>
-          done error
     it 'should fetch the devices from meshblu', ->
       @myDeviceHandler.done()
 

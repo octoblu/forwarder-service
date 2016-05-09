@@ -15,8 +15,6 @@ xdescribe 'Forwarder Subscriptions-Find', ->
       .set 'Authorization', "Basic #{@userAuth}"
       .reply 200, uuid: 'some-uuid', token: 'some-token'
 
-
-
     serverOptions =
       port: undefined,
       disableLogging: true
