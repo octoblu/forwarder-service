@@ -1,9 +1,10 @@
-name: ''
-forwarderTypeId: ''
+name: 'Elastic Search'
+forwarderTypeId: 'meshblu-forwarder-elasticsearch'
+enabled: false
 logoUrl: 'https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/.svg'
-deviceType: 'forwarder:'
+deviceType: 'forwarder:elasticsearch'
 description: ''
-connector: 'meshblu-'
+connector: 'meshblu-forwarder-elasticsearch'
 schemas:
   version: '2.0.0'
   configure:

@@ -1,11 +1,12 @@
 name: 'Splunk Event Collector'
-forwarderTypeId: 'splunk-event-collector'
+forwarderTypeId: 'meshblu-forwarder-splunk'
+enabled: true
 logoUrl: 'https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/splunk.svg'
 deviceType: 'forwarder:splunk'
 description: ''
-connector: 'meshblu-splunk-event-collector'
+connector: 'meshblu-forwarder-splunk'
 schemas:
-  version: '2.0.0'
+  version: '1.0.0'
   configure:
     type: 'object'
     properties:

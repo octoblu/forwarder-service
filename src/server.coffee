@@ -33,7 +33,7 @@ class Server
 
     app.options '*', cors()
 
-    forwarderSubscriptionService = new ForwarderSubscriptionService {server, port,protocol }
+    forwarderSubscriptionService = new ForwarderSubscriptionService {server, port, protocol }
     router = new Router {@meshbluConfig, forwarderSubscriptionService}
 
     router.route app

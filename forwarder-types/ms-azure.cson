@@ -1,9 +1,10 @@
-name: ''
-forwarderTypeId: ''
+name: 'Microsoft Azure'
+forwarderTypeId: 'meshblu-forwarder-msazure'
+enabled: true
 logoUrl: 'https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/.svg'
-deviceType: 'forwarder:'
+deviceType: 'forwarder:msazure'
 description: ''
-connector: 'meshblu-'
+connector: 'meshblu-forwarder-msazure'
 schemas:
   version: '2.0.0'
   configure:

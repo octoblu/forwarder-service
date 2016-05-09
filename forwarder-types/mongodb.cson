@@ -1,9 +1,10 @@
 name: 'MongoDB Forwarder'
-forwarderTypeId: 'mongodb-forwarder'
+forwarderTypeId: 'meshblu-forwarder-mongodb'
+enabled: false
 logoUrl: 'https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/mongodb.svg'
 deviceType: 'forwarder:mongodb'
 description: ''
-connector: 'meshblu-mongodb-fowarder'
+connector: 'meshblu-fowarder-mongodb'
 schemas:
   version: '2.0.0'
   configure:
