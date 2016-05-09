@@ -44,7 +44,6 @@ describe 'Get forwarders', ->
 
   describe 'when there are no devices', ->
     beforeEach (done) ->
-
       @myDeviceHandler = @meshblu
         .post '/search/devices'
         .set 'Authorization', "Basic #{@userAuth}"

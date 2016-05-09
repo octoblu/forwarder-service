@@ -42,14 +42,7 @@ describe 'Adding Forwarder Subscriptions', ->
         @forwarder =
           uuid: "forwarder-uuid"
           type: "forwarder:mongodb"
-          owner: ""
-          forwarders: {
-            version: "1.0.0"
-          }
-          meshblu: {
-            version: "2.0.0"
-
-          }
+          
         @myEmitterDeviceHandler = @meshblu
           .put '/v2/devices/not-in-the-list-uuid'
           .set 'Authorization', "Basic #{@userAuth}"

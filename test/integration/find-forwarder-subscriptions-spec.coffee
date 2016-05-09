@@ -5,8 +5,8 @@ Server  = require '../../src/server'
 moment  = require 'moment'
 _       = require 'lodash'
 
-xdescribe 'Forwarder Subscriptions-Find', ->
-  beforeEach (done) ->
+describe 'Forwarder Subscriptions-Find', ->
+  beforeEach 'setup shmock', (done) ->
     @meshblu = shmock 0xd00d
     @userAuth = new Buffer('some-uuid:some-token').toString 'base64'
     @authDevice = @meshblu
@@ -35,3 +35,28 @@ xdescribe 'Forwarder Subscriptions-Find', ->
 
   afterEach (done) ->
     @meshblu.close done
+
+  context 'asking for a list of subscriptions', ->
+    beforeEach 'setup meshblu', (done) ->
+      @authDevice = @meshblu
+        .get '/v2/devices/forwarder-uuid/subscriptions'
+        .set 'Authorization', "Basic #{@userAuth}"
+        .reply 200, [
+          {emitterUuid: 'e1', type: 'broadcast.sent'}
+          {emitterUuid: 'e2', type: 'broadcast.received'}
+        ]
+
+      options =
+        auth:
+          username: 'some-uuid'
+          password: 'some-token'
+        json: true
+
+      request.get "http://localhost:#{@serverPort}/forwarders/forwarder-uuid/subscriptions", options, (error, response, @body) =>
+        done error
+
+    it 'should respond with the list of subscriptions', ->
+      expect(@body).to.deep.equal [
+        {emitterUuid: 'e1', type: 'broadcast.sent'}
+        {emitterUuid: 'e2', type: 'broadcast.received'}
+      ]

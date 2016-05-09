@@ -7,7 +7,7 @@ class Router
     forwarderSubscriptionController = new ForwarderSubscriptionController {@forwarderSubscriptionService}
 
     app.get '/forwarders', forwarderSubscriptionController.getForwarders
-    app.get '/forwarders/:uuid/subscriptions', forwarderSubscriptionController.getForwarderSubscriptions
+    app.get '/forwarders/:forwarderUuid/subscriptions', forwarderSubscriptionController.getForwarderSubscriptions
     app.post '/forwarders/:forwarderUuid/subscriptions/:emitterUuid/:type', forwarderSubscriptionController.addForwarderSubscription
     app.delete '/forwarders/:forwarderUuid/subscriptions/:emitterUuid/:type', forwarderSubscriptionController.removeForwarderSubscription
     app.get '/types', (req, res) ->
