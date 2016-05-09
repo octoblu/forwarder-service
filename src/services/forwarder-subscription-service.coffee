@@ -76,9 +76,14 @@ class ForwarderSubscriptionService
       $addToSet:
         'meshblu.whitelists.broadcast.sent': forwarderUuid
 
-    meshbluHttp.updateDangerously subscription.emitterUuid, update, (error) =>
+    meshbluHttp.updateDangerously subscription.emitterUuid, update, (error) =>      
       return callback(@_createError 403, "Cannot modify #{subscription.emitterUuid}" ) if error?
-      callback()
+
+      meshbluHttp.createSubscription {
+        subscriberUuid: forwarderUuid
+        emitterUuid: subscription.emitterUuid
+        type: subscription.type
+      }, callback
 
   removeForwarderSubscriptions: (meshbluAuth, forwarderUuid,  callback =->) =>
 

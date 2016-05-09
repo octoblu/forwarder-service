@@ -3,6 +3,7 @@ _              = require 'lodash'
 
 class ForwarderSubscriptionController
   constructor: ({@forwarderSubscriptionService}) ->
+
   _findForwarderType: (forwarderTypeId) =>
     forwarderType = _.find forwarderTypes, (forwarderType) ->
         return forwarderType.forwarderTypeId == forwarderTypeId
@@ -40,7 +41,7 @@ class ForwarderSubscriptionController
   addForwarderSubscription: (request, response) =>
     {meshbluAuth, params, body} = request
     subscription = body
-    forwarderUuid = params.uuid
+    forwarderUuid = params.uuid  
 
     return response.status(422).send(error: "Missing emitterUuid") unless subscription.emitterUuid?
     return response.status(422).send(error: "Missing type") unless subscription.type?
@@ -48,8 +49,7 @@ class ForwarderSubscriptionController
     @forwarderSubscriptionService.addForwarderSubscription({meshbluAuth, forwarderUuid, subscription},
       (error) =>
         return response.status(error.code || 500).send(error: error.message) if error?
-        return response.status(200).send(subscriptions: forwarderSubscriptions) unless updated
-        response.status(201).send(subscriptions: forwarderSubscriptions)
+        return response.sendStatus(201)
     )
 
   removeForwarderSubscriptions: (request, response) =>
