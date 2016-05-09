@@ -1,6 +1,6 @@
 {
   "name": "forwarder-subscription-service",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Put some description here",
   "keywords": [],
   "homepage": "https://github.com/octoblu/forwarder-subscription",
@@ -40,7 +40,7 @@
     "debug": "^2.2.0",
     "errorhandler": "^1.4.2",
     "express": "^4.13.3",
-    "express-meshblu-auth": "^5.1.0",
+    "express-meshblu-auth": "^5.3.4",
     "express-meshblu-healthcheck": "^1.0.1",
     "jsonschema": "^1.1.0",
     "lodash": "^4.11.1",

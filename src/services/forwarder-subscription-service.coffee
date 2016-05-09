@@ -1,11 +1,9 @@
-MeshbluHttp = require 'meshblu-http'
-{Validator} =require 'jsonschema'
+MeshbluHttp    = require 'meshblu-http'
 forwarderTypes = require '../forwarder-types/forwarder-types'
-_ = require 'lodash'
+_              = require 'lodash'
 
 class ForwarderSubscriptionService
   constructor: (@meshbluOptions)->
-    @validator = new Validator()
 
   getForwarders:(meshbluAuth, callback) =>
     meshbluHttp = @_getMeshbluHttp meshbluAuth
@@ -20,7 +18,7 @@ class ForwarderSubscriptionService
     meshbluHttp = @_getMeshbluHttp meshbluAuth
     meshbluHttp.subscriptions forwarderUuid, callback
 
-  addForwarderSubscription: ({meshbluAuth, forwarderUuid, emitterUuid, type},  callback ) =>
+  addForwarderSubscription: ({meshbluAuth, forwarderUuid, emitterUuid, type},  callback ) =>    
     meshbluHttp = @_getMeshbluHttp meshbluAuth
 
     update =

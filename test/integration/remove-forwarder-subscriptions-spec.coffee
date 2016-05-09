@@ -10,10 +10,10 @@ describe 'Remove Forwarder Subscriptions', ->
     @meshblu = shmock 0xd00d
     @userAuth = new Buffer('some-uuid:some-token').toString 'base64'
     @authDevice = @meshblu
-      .get '/v2/whoami'
+      .post '/authenticate'
       .persist()
       .set 'Authorization', "Basic #{@userAuth}"
-      .reply 200, uuid: 'some-uuid', token: 'some-token'
+      .reply 200
 
     serverOptions =
       port: undefined,
