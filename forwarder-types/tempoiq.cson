@@ -1,16 +1,4 @@
 name: 'Tempo IQ'
-forwarderTypeId: 'meshblu-forwarder-tempoiq'
 enabled: false
-logoUrl: 'https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/.svg'
 deviceType: 'forwarder:tempoiq'
-description: ''
-connector: 'meshblu-forwarder-tempoiq'
-schemas:
-  version: '2.0.0'
-  configure:
-    type: 'object'
-    properties:
-      exampleOption:
-        title: 'example'
-        type: 'string'
-        required: true
+url: 'https://data-forwarder-tempoiq.octoblu.com'

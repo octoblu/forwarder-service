@@ -1,16 +1,4 @@
 name: 'Elastic Search'
-forwarderTypeId: 'meshblu-forwarder-elasticsearch'
-enabled: false
-logoUrl: 'https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/.svg'
+enabled: true
 deviceType: 'forwarder:elasticsearch'
-description: ''
-connector: 'meshblu-forwarder-elasticsearch'
-schemas:
-  version: '2.0.0'
-  configure:
-    type: 'object'
-    properties:
-      exampleOption:
-        title: 'example'
-        type: 'string'
-        required: true
+url: 'https://data-forwarder-elasticsearch.octoblu.com'

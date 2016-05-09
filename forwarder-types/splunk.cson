@@ -1,20 +1,4 @@
-name: 'Splunk Event Collector'
-forwarderTypeId: 'meshblu-forwarder-splunk'
-enabled: true
-logoUrl: 'https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/splunk.svg'
+name: 'Splunk'
+enabled: false
 deviceType: 'forwarder:splunk'
-description: ''
-connector: 'meshblu-forwarder-splunk'
-schemas:
-  version: '1.0.0'
-  configure:
-    type: 'object'
-    properties:
-      EventCollectorToken:
-        title: 'Event Collector Token'
-        type: 'string'
-        required: true
-      SplunkEventUrl:
-        title: 'Splunk Event URL'
-        type: 'string'
-        required: true
+url: 'https://data-forwarder-splunk.octoblu.com'
