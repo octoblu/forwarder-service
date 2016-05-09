@@ -1,7 +1,7 @@
 name: 'Microsoft Azure'
 forwarderTypeId: 'meshblu-forwarder-msazure'
 enabled: true
-logoUrl: 'https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/.svg'
+logoUrl: 'https://s3-us-west-2.amazonaws.com/octoblu-icons/channel/microsoft-azure.svg'
 deviceType: 'forwarder:msazure'
 description: ''
 connector: 'meshblu-forwarder-msazure'
