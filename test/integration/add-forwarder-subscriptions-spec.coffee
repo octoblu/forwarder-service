@@ -57,16 +57,13 @@ describe 'Adding Forwarder Subscriptions', ->
           .reply 403
 
         options =
+          url: "http://localhost:#{@serverPort}/forwarders/forwarder-uuid/subscriptions/not-in-the-list-uuid/broadcast.sent"
           auth:
             username: 'some-uuid'
             password: 'some-token'
           json: true
-          body:
-            emitterUuid: 'not-in-the-list-uuid', type: 'broadcast.sent'
 
-        request.post "http://localhost:#{@serverPort}/forwarders/forwarder-uuid/subscriptions",options,
-          (error, @response, @body) =>
-            done error
+        request.post options, (error, @response, @body) => done error
 
       it 'should return a 403', ->
         expect(@response.statusCode).to.equal 403
@@ -90,15 +87,13 @@ describe 'Adding Forwarder Subscriptions', ->
 
       beforeEach 'make the call', (done) ->
         options =
+          uri: "http://localhost:#{@serverPort}/forwarders/forwarder-uuid/subscriptions/emitter-uuid/broadcast.sent"
           auth:
             username: 'some-uuid'
             password: 'some-token'
           json: true
-          body:
-            emitterUuid: 'emitter-uuid', type: 'broadcast.sent'
 
-        request.post "http://localhost:#{@serverPort}/forwarders/forwarder-uuid/subscriptions", options,
-          (error, @response) => done()
+        request.post options, (error, @response) => done()
 
       it 'should update the whitelist', ->
         @myEmitterDeviceHandler.done()
