@@ -97,7 +97,8 @@ describe 'Adding Forwarder Subscriptions', ->
           body:
             emitterUuid: 'emitter-uuid', type: 'broadcast.sent'
 
-        request.post "http://localhost:#{@serverPort}/forwarders/forwarder-uuid/subscriptions", options, done
+        request.post "http://localhost:#{@serverPort}/forwarders/forwarder-uuid/subscriptions", options,
+          (error, @response) => done()
 
       it 'should update the whitelist', ->
         @myEmitterDeviceHandler.done()
@@ -105,7 +106,7 @@ describe 'Adding Forwarder Subscriptions', ->
       it 'should create the subscription', ->
         @createSubscriptionHandler.done()
 
-      xit 'should return a 201', ->
+      it 'should return a 201', ->
         expect(@response.statusCode).to.equal 201
 
     xcontext 'when trying to add a duplicate subscription for a device that already has a subscription', ->
