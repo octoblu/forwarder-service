@@ -1,4 +1,5 @@
 name: 'Microsoft Azure Service Bus'
 enabled: true
 deviceType: 'forwarder:msazure'
-url: 'https://data-forwarder-azure-service-bus.octoblu.com'
+createUrl: 'https://data-forwarder-azure-service-bus.octoblu.com/devices'
+configurationUrl: 'https://data-forwarder-azure-service-bus.octoblu.com/schemas/v1/configure.json'
