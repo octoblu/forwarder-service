@@ -1,4 +1,5 @@
 name: 'Elastic Search'
+uuid: '7cf06c5e-4128-417a-80db-0a6eff66519d'
 enabled: false
 deviceType: 'forwarder:elasticsearch'
 url: 'https://data-forwarder-elasticsearch.octoblu.dev'

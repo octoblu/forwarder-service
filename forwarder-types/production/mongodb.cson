@@ -1,4 +1,5 @@
 name: 'MongoDB'
+uuid: '15a0e573-f7ea-48bb-881d-146133df6740'
 enabled: true
 deviceType: 'forwarder:mongodb'
 createUrl: 'https://data-forwarder-mongodb.octoblu.com/devices'

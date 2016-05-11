@@ -1,4 +1,5 @@
 name: 'Splunk'
+uuid: '76f6813b-0af5-449b-8835-19a88aa0d57a'
 enabled: false
 deviceType: 'forwarder:splunk'
 url: 'https://data-forwarder-splunk.octoblu.com'

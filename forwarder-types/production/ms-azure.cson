@@ -1,4 +1,5 @@
 name: 'Microsoft Azure Service Bus'
+uuid: 'dce0e841-e457-4baf-b4d2-bbea1feb23d8'
 enabled: true
 deviceType: 'forwarder:msazure'
 createUrl: 'https://data-forwarder-azure-service-bus.octoblu.com/devices'
