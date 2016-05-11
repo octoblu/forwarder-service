@@ -1,4 +1,5 @@
-name: 'Mongo DB'
-enabled: false
+name: 'MongoDB'
+enabled: true
 deviceType: 'forwarder:mongodb'
-url: 'https://data-forwarder-mongodb.octoblu.com'
+createUrl: 'https://data-forwarder-mongodb.octoblu.com/devices'
+configurationUrl: 'https://data-forwarder-mongodb.octoblu.com/schemas/v1/configure.json'
