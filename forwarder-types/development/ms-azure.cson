@@ -1,5 +1,5 @@
-name: 'MongoDB'
+name: 'Microsoft Azure Service Bus'
 enabled: true
-deviceType: 'forwarder:mongodb'
-createUrl: 'http://data-forwarder-mongodb.octoblu.dev/devices'
-configurationUrl: 'http://data-forwarder-mongodb.octoblu.dev/schemas/v1/configure.json'
+deviceType: 'forwarder:msazure'
+createUrl: 'https://data-forwarder-azure-service-bus.octoblu.dev/devices'
+configurationUrl: 'https://data-forwarder-azure-service-bus.octoblu.dev/schemas/v1/configure.json'
