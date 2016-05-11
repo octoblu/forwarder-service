@@ -1,0 +1,4 @@
+name: 'Mongo DB'
+enabled: false
+deviceType: 'forwarder:mongodb'
+url: 'https://data-forwarder-mongodb.octoblu.dev'

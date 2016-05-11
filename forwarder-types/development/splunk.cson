@@ -1,0 +1,4 @@
+name: 'Splunk'
+enabled: false
+deviceType: 'forwarder:splunk'
+url: 'https://data-forwarder-splunk.octoblu.dev'

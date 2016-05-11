@@ -1,0 +1,4 @@
+name: 'Elastic Search'
+enabled: false
+deviceType: 'forwarder:elasticsearch'
+url: 'https://data-forwarder-elasticsearch.octoblu.dev'

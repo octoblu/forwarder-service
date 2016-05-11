@@ -8,9 +8,10 @@ gulp.task 'clean', ->
   gulp.src('src/forwarder-types', read: false).pipe clean()
 
 gulp.task 'build', ->
-  gulp.src './forwarder-types/**/*.cson'
+  env = process.env.NODE_ENV || 'production'
+  gulp.src "./forwarder-types/#{env}/**/*.cson"
     .pipe gcson()
     .pipe jsonCombine('forwarder-types.json',  (data) -> new Buffer(JSON.stringify(_.values(data))))
     .pipe gulp.dest './src/forwarder-types'
-    
+
 gulp.task 'default', ['clean', 'build']
