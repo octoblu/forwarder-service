@@ -38,9 +38,8 @@ describe 'Get forwarders', ->
 
   beforeEach ->
     @deviceQuery =
-      owner: "some-uuid"
-      $exists:
-        forwarder: true
+      type:
+        $regex: "^forwarder"
 
   describe 'when there are no devices', ->
     beforeEach (done) ->

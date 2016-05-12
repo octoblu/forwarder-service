@@ -8,9 +8,8 @@ class ForwarderSubscriptionService
   getForwarders:(meshbluAuth, callback) =>
     meshbluHttp = @_getMeshbluHttp meshbluAuth
     query =
-      owner: meshbluAuth.uuid
-      $exists:
-        forwarder: true
+      type:
+        $regex: "^forwarder"
 
     meshbluHttp.search query, {}, callback
 
@@ -18,7 +17,7 @@ class ForwarderSubscriptionService
     meshbluHttp = @_getMeshbluHttp meshbluAuth
     meshbluHttp.subscriptions forwarderUuid, callback
 
-  addForwarderSubscription: ({meshbluAuth, forwarderUuid, emitterUuid, type},  callback ) =>    
+  addForwarderSubscription: ({meshbluAuth, forwarderUuid, emitterUuid, type},  callback ) =>
     meshbluHttp = @_getMeshbluHttp meshbluAuth
 
     update =
