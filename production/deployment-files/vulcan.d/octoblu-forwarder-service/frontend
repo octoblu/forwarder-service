@@ -1,0 +1,4 @@
+--id octoblu-forwarder-service
+--backend octoblu-forwarder-service
+--route Host("forwarder-service.octoblu.com")
+--trustForwardHeader

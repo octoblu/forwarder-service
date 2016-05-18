@@ -1,0 +1,5 @@
+--id octoblu-member-service-job-logger
+--frontend octoblu-member-service
+--backend octoblu-member-service
+--redis-uri redis://job-logger.csy8op.0001.usw2.cache.amazonaws.com:6379
+--redis-queue-name sample-rate:1.00

@@ -1,10 +1,10 @@
 {
-  "name": "forwarder-subscription-service",
-  "version": "0.2.10",
+  "name": "forwarder-service",
+  "version": "",
   "description": "Put some description here",
   "keywords": [],
-  "homepage": "https://github.com/octoblu/forwarder-subscription",
-  "bugs": "https://github.com/octoblu/forwarder-subscription/issues",
+  "homepage": "https://github.com/octoblu/forwarder-service",
+  "bugs": "https://github.com/octoblu/forwarder-service/issues",
   "author": {
     "name": "Octoblu",
     "url": "https://github.com/octoblu"
@@ -12,7 +12,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/octoblu/forwarder-subscription.git"
+    "url": "https://github.com/octoblu/forwarder-service.git"
   },
   "scripts": {
     "start": "gulp && node command.js",
