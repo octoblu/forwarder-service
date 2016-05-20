@@ -1,6 +1,0 @@
-name: 'Splunk'
-enabled: true
-uuid: '0f22c30a-c93c-40c9-8ec1-232850f25ca3'
-deviceType: 'forwarder:splunk'
-createUrl: 'https://data-forwarder-splunk.octoblu.dev/devices'
-configurationUrl: 'https://data-forwarder-splunk.octoblu.dev/schemas/v1/configure.json'

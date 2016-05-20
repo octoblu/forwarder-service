@@ -1,0 +1,6 @@
+name: 'Splunk'
+enabled: true
+uuid: '0f22c30a-c93c-40c9-8ec1-232850f25ca3'
+deviceType: 'forwarder:splunk'
+createUrl: 'https://data-forwarder-splunk.{{dataForwarderDomain}}/devices'
+configurationUrl: 'https://data-forwarder-splunk.{{dataForwarderDomain}}/schemas/v1/configure.json'

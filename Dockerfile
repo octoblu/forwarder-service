@@ -10,4 +10,5 @@ COPY package.json /usr/src/app/
 RUN npm -s install
 COPY . /usr/src/app/
 
+RUN npm build
 CMD [ "npm", "start" ]

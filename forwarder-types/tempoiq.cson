@@ -2,4 +2,4 @@ name: 'Tempo IQ'
 uuid: 'a9b97654-0c77-4970-9e67-9c3e98add559'
 enabled: false
 deviceType: 'forwarder:tempoiq'
-url: 'https://data-forwarder-tempoiq.octoblu.dev'
+url: 'https://data-forwarder-tempoiq.{{dataForwarderDomain}}'

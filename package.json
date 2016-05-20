@@ -1,6 +1,6 @@
 {
   "name": "forwarder-service",
-  "version": "0.2.24",
+  "version": "0.2.25",
   "description": "Creates forwarders and device subscriptions for forwarders",
   "keywords": [
     "octoblu",
@@ -27,6 +27,7 @@
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-cson": "^0.4.0",
+    "gulp-json-template-christacheio": "^1.0.0",
     "gulp-jsoncombine": "^1.0.3",
     "istanbul": "^0.4.0",
     "mocha": "^2.3.4",

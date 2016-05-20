@@ -1,0 +1,6 @@
+name: 'MangoDB'
+uuid: '3bd3f916-2539-4d90-9d11-20576f3eef3a'
+enabled: true
+deviceType: 'forwarder:mongodb'
+createUrl: 'https://data-forwarder-mongodb.{{dataForwarderDomain}}/devices'
+configurationUrl: 'https://data-forwarder-mongodb.{{dataForwarderDomain}}/schemas/v1/configure.json'
