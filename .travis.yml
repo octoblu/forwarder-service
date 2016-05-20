@@ -10,6 +10,7 @@ addons:
 env:
 - NODE_ENV=production
 before_script:
+- npm install -g gulp
 - npm install -g codeclimate-test-reporter
 - npm run build
 after_script:
