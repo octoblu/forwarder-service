@@ -1,5 +1,7 @@
 name: 'Elastic Search'
 uuid: '7cf06c5e-4128-417a-80db-0a6eff66519d'
-enabled: false
+enabled: true
 deviceType: 'forwarder:elasticsearch'
 url: 'https://data-forwarder-elasticsearch.{{dataForwarderDomain}}'
+createUrl: 'https://data-forwarder-elasticsearch.{{dataForwarderDomain}}/devices'
+configurationUrl: 'https://data-forwarder-elasticsearch.{{dataForwarderDomain}}/schemas/v1/configure.json'

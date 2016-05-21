@@ -1,6 +1,6 @@
 {
   "name": "forwarder-service",
-  "version": "0.2.25",
+  "version": "0.2.26",
   "description": "Creates forwarders and device subscriptions for forwarders",
   "keywords": [
     "octoblu",
@@ -19,7 +19,7 @@
   },
   "scripts": {
     "build": "gulp",
-    "start": "node command.js",
+    "start": "gulp && node command.js",
     "test": "gulp && mocha"
   },
   "devDependencies": {
