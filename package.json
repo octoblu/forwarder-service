@@ -1,6 +1,6 @@
 {
   "name": "forwarder-service",
-  "version": "0.2.26",
+  "version": "0.2.27",
   "description": "Creates forwarders and device subscriptions for forwarders",
   "keywords": [
     "octoblu",

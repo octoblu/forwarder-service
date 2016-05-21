@@ -1,4 +1,4 @@
-name: 'MangoDB'
+name: 'MongoDB'
 uuid: '3bd3f916-2539-4d90-9d11-20576f3eef3a'
 enabled: true
 deviceType: 'forwarder:mongodb'
