@@ -9,9 +9,7 @@ addons:
     repo_token: 8ab0f72a6e9ad1ef81906be5534c7bf4df93c71219b25506869f69bbeeff4ab6
 
 before_script:
-- npm install -g gulp
 - npm install -g codeclimate-test-reporter
-- npm run build
 
 after_script:
 - codeclimate-test-reporter < coverage/lcov.info
