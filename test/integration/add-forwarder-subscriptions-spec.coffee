@@ -43,6 +43,11 @@ describe 'Adding Forwarder Subscriptions', ->
           uuid: "forwarder-uuid"
           type: "forwarder:mongodb"
 
+        @meshblu
+          .get '/v2/devices/not-in-the-list-uuid'
+          .set 'Authorization', "Basic #{@userAuth}"
+          .reply 200, meshblu: version: '2.0.0'
+
         @myEmitterDeviceHandler = @meshblu
           .put '/v2/devices/not-in-the-list-uuid'
           .set 'Authorization', "Basic #{@userAuth}"
@@ -66,6 +71,11 @@ describe 'Adding Forwarder Subscriptions', ->
 
     context 'when trying to add a subscription for a device that I can configure', ->
       beforeEach 'set up subscription meshblu calls', ->
+        @meshblu
+          .get '/v2/devices/emitter-uuid'
+          .set 'Authorization', "Basic #{@userAuth}"
+          .reply 200, meshblu: version: '2.0.0'
+
         @myEmitterDeviceHandler = @meshblu
           .put '/v2/devices/emitter-uuid'
           .set 'Authorization', "Basic #{@userAuth}"
@@ -81,6 +91,81 @@ describe 'Adding Forwarder Subscriptions', ->
       beforeEach 'make the call', (done) ->
         options =
           uri: "http://localhost:#{@serverPort}/forwarders/forwarder-uuid/subscriptions/emitter-uuid/broadcast.sent"
+          auth:
+            username: 'some-uuid'
+            password: 'some-token'
+          json: true
+
+        request.post options, (error, @response) => done()
+
+      it 'should update the whitelist', ->
+        @myEmitterDeviceHandler.done()
+
+      it 'should create the subscription', ->
+        @createSubscriptionHandler.done()
+
+      it 'should return a 201', ->
+        expect(@response.statusCode).to.equal 201
+    context 'when trying to add a broadcast.sent subscription for a device with 1.0 permissions that I can configure', ->
+      beforeEach 'set up subscription meshblu calls', ->
+        @meshblu
+          .get '/v2/devices/emitter-uuid'
+          .set 'Authorization', "Basic #{@userAuth}"
+          .reply 200, meshblu: {}
+
+        @myEmitterDeviceHandler = @meshblu
+          .put '/v2/devices/emitter-uuid'
+          .set 'Authorization', "Basic #{@userAuth}"
+          .send {$addToSet: {"receiveWhitelist": "forwarder-uuid"}}
+          .reply 204
+
+        @createSubscriptionHandler = @meshblu
+          .post '/v2/devices/forwarder-uuid/subscriptions/emitter-uuid/broadcast.sent'
+          .set 'Authorization', "Basic #{@userAuth}"
+          .send()
+          .reply 201
+
+      beforeEach 'make the call', (done) ->
+        options =
+          uri: "http://localhost:#{@serverPort}/forwarders/forwarder-uuid/subscriptions/emitter-uuid/broadcast.sent"
+          auth:
+            username: 'some-uuid'
+            password: 'some-token'
+          json: true
+
+        request.post options, (error, @response) => done()
+
+      it 'should update the whitelist', ->
+        @myEmitterDeviceHandler.done()
+
+      it 'should create the subscription', ->
+        @createSubscriptionHandler.done()
+
+      it 'should return a 201', ->
+        expect(@response.statusCode).to.equal 201
+
+    context 'when trying to add a broadcast.received subscription for a device with 1.0 permissions that I can configure', ->
+      beforeEach 'set up subscription meshblu calls', ->
+        @meshblu
+          .get '/v2/devices/emitter-uuid'
+          .set 'Authorization', "Basic #{@userAuth}"
+          .reply 200, meshblu: {}
+
+        @myEmitterDeviceHandler = @meshblu
+          .put '/v2/devices/emitter-uuid'
+          .set 'Authorization', "Basic #{@userAuth}"
+          .send {$addToSet: {"configureWhitelist": "forwarder-uuid"}}
+          .reply 204
+
+        @createSubscriptionHandler = @meshblu
+          .post '/v2/devices/forwarder-uuid/subscriptions/emitter-uuid/broadcast.received'
+          .set 'Authorization', "Basic #{@userAuth}"
+          .send()
+          .reply 201
+
+      beforeEach 'make the call', (done) ->
+        options =
+          uri: "http://localhost:#{@serverPort}/forwarders/forwarder-uuid/subscriptions/emitter-uuid/broadcast.received"
           auth:
             username: 'some-uuid'
             password: 'some-token'

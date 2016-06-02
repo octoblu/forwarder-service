@@ -37,35 +37,8 @@ describe 'Remove Forwarder Subscriptions', ->
     @meshblu.close done
 
   describe 'Remove a broadcast subscription', ->
-    context 'when trying to remove a subscription for a device that I cannot modify', ->
-      beforeEach (done) ->
-
-        @myEmitterDeviceHandler = @meshblu
-          .put '/v2/devices/not-in-the-list-uuid'
-          .set 'Authorization', "Basic #{@userAuth}"
-          .send {$pull: {"meshblu.whitelists.broadcast.sent": {uuid: "forwarder-uuid"}}}
-          .reply 403
-
-        options =
-          uri: "http://localhost:#{@serverPort}/forwarders/forwarder-uuid/subscriptions/not-in-the-list-uuid/broadcast.sent"
-          auth:
-            username: 'some-uuid'
-            password: 'some-token'
-          json: true
-
-        request.delete options, (error, @response) => done error
-
-      it 'should return a 403', ->
-        expect(@response.statusCode).to.equal 403
-
     context 'when trying to remove a subscription for a device that I can configure', ->
       beforeEach 'set up subscription meshblu calls', ->
-        @myEmitterDeviceHandler = @meshblu
-          .put '/v2/devices/emitter-uuid'
-          .set 'Authorization', "Basic #{@userAuth}"
-          .send {$pull: {"meshblu.whitelists.broadcast.sent": {uuid: "forwarder-uuid"}}}
-          .reply 204
-
         @createSubscriptionHandler = @meshblu
           .delete '/v2/devices/forwarder-uuid/subscriptions/emitter-uuid/broadcast.sent'
           .set 'Authorization', "Basic #{@userAuth}"
@@ -81,9 +54,6 @@ describe 'Remove Forwarder Subscriptions', ->
           json: true
 
         request.delete options, (error, @response) => done error
-
-      it 'should update the whitelist', ->
-        @myEmitterDeviceHandler.done()
 
       it 'should create the subscription', ->
         @createSubscriptionHandler.done()
