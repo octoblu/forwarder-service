@@ -1,16 +1,22 @@
 _             = require 'lodash'
+OctobluRaven  = require 'octoblu-raven'
 MeshbluConfig = require 'meshblu-config'
 Server        = require './src/server'
 
 class Command
   constructor: ->
+    @octobluRaven = new OctobluRaven()
     @serverOptions =
       port:           process.env.PORT || 80
       disableLogging: process.env.DISABLE_LOGGING == "true"
+      octobluRaven:   @octobluRaven
 
   panic: (error) =>
     console.error error.stack
     process.exit 1
+
+  catchErrors: =>
+    @octobluRaven.patchGlobal()
 
   run: =>
     # Use this to require env
@@ -29,4 +35,5 @@ class Command
         process.exit 0
 
 command = new Command()
+command.catchErrors()
 command.run()

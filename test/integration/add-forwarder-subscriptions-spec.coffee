@@ -1,13 +1,15 @@
-http    = require 'http'
-request = require 'request'
-shmock  = require 'shmock'
-Server  = require '../../src/server'
-moment  = require 'moment'
-_       = require 'lodash'
+http          = require 'http'
+request       = require 'request'
+shmock        = require 'shmock'
+enableDestroy = require 'server-destroy'
+Server        = require '../../src/server'
+moment        = require 'moment'
+_             = require 'lodash'
 
 describe 'Adding Forwarder Subscriptions', ->
   beforeEach (done) ->
     @meshblu = shmock 0xd00d
+    enableDestroy @meshblu
     @userAuth = new Buffer('some-uuid:some-token').toString 'base64'
     @authDevice = @meshblu
       .post '/authenticate'
@@ -30,11 +32,9 @@ describe 'Adding Forwarder Subscriptions', ->
       @serverPort = @server.address().port
       done()
 
-  afterEach (done) ->
-    @server.stop done
-
-  afterEach (done) ->
-    @meshblu.close done
+  afterEach ->
+    @server.destroy()
+    @meshblu.destroy()
 
   describe 'Add a broadcast subscription', ->
     context 'when trying to add a subscription for a device that I cannot modify', ->

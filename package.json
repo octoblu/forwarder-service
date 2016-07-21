@@ -1,6 +1,6 @@
 {
   "name": "forwarder-service",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Creates forwarders and device subscriptions for forwarders",
   "keywords": [
     "octoblu",
@@ -41,6 +41,7 @@
     "express": "^4.13.3",
     "express-meshblu-auth": "^5.3.4",
     "express-meshblu-healthcheck": "^1.0.1",
+    "express-package-version": "0.0.2",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-cson": "^0.4.0",
@@ -51,7 +52,9 @@
     "meshblu-config": "^4.0.0",
     "meshblu-http": "^5.3.3",
     "moment": "^2.13.0",
-    "morgan": "^1.6.1"
+    "morgan": "^1.6.1",
+    "octoblu-raven": "^3.0.1",
+    "server-destroy": "^1.0.1"
   },
   "peerDependencies": {},
   "engines": {
