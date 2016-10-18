@@ -1,6 +1,6 @@
 {
   "name": "forwarder-service",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Creates forwarders and device subscriptions for forwarders",
   "keywords": [
     "octoblu",
@@ -19,7 +19,10 @@
   },
   "scripts": {
     "start": "gulp && node command.js",
-    "test": "gulp && mocha"
+    "test": "gulp && mocha",
+    "coverage": "nyc npm test",
+    "mocha:json": "env NPM_ENV=test mocha --reporter json > coverage/mocha.json",
+    "test:watch": "mocha -w -R mocha-multi --reporter-options spec=-,mocha-osx-reporter=-"
   },
   "devDependencies": {
     "chai": "^3.4.1",
@@ -30,7 +33,10 @@
     "request": "^2.66.0",
     "shmock": "^0.8.1",
     "sinon": "^1.17.2",
-    "sinon-chai": "^2.8.0"
+    "sinon-chai": "^2.8.0",
+    "nyc": "^8.3.0",
+    "mocha-osx-reporter": "^0.1.2",
+    "mocha-multi": "^0.9.1"
   },
   "dependencies": {
     "body-parser": "^1.14.1",
@@ -61,5 +67,16 @@
     "node": ">=0.8.0",
     "npm": ">=1.2.10"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "nyc": {
+    "cache": true,
+    "reporter": [
+      "text-summary",
+      "lcov",
+      "json"
+    ],
+    "extension": [
+      ".coffee"
+    ]
+  }
 }
